@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8" />
+    <title>To Do List</title>
+
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body onload="getStoredItems()">
+    <div class="header">
+        <h2 class="title">To Do List</h2>
+        <div class="input">
+            <input type="text" id="listItemInput" placeholder="Enter task description...">
+            <span onclick="addNewElement()" class="addBtn">Add</span>
+        </div>
+    </div>
+
+    <ul class="todoList" id="list"></ul>
+
+    <script src="js/main.js" deffer></script>
+</body>
+</html>
