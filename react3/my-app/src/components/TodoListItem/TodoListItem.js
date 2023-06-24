@@ -23,8 +23,12 @@ function TodoListItem({ description, completed, id, toggleCompleted, deleteItem 
     return (
         <li className={classNames.join(" ")}>
             {description}
-            <Button text="Complete" color={"green"} action={switchCompletedState} />
-            <Button text="Delete" color={"red"} action={handleDelete} />
+            <Button color={"green"} action={switchCompletedState}>
+                Complete
+            </Button>
+            <Button color={"red"} action={handleDelete}>
+                Delete
+            </Button>
         </li>
     );
 }

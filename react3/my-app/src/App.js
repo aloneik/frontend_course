@@ -10,6 +10,7 @@ import Button from './components/Button/Button';
 
 import { Filter, filterItems, SortType, sortItems } from './utils.js'
 import { useData } from './effects/useData';
+import ButtonGroup from './components/ButtonGroup/ButtonGroup';
 
 
 function App() {
@@ -19,11 +20,32 @@ function App() {
   const [todosData, isLoaded, error] = useData("https://jsonplaceholder.typicode.com/todos");
   const inputRef = useRef(null);
 
-  useEffect(() => setTodoItems(todosData.slice(20)), [todosData]);
+  useEffect(() => setTodoItems(todosData), [todosData]);
   useEffect(() => inputRef.current.focus(), []);
 
   const filteredTodoItems = useMemo(() => filterItems(selectedFiter, todoItems), [selectedFiter, todoItems]);
   const filteredAndSortedTodoItems = useMemo(() => sortItems(selectedSortType, filteredTodoItems), [selectedSortType, filteredTodoItems]);
+
+  const filterButtons = [
+    {label: "All", id: 1},
+    {label: "Active", id:2},
+    {label: "Completed", id: 3}
+  ];
+  const sortTypeButtons = [
+    {label: "No Sort", id: 1},
+    {label: "Sort by description", id: 2},
+    {label: "Sort by status", id: 3}
+  ];
+
+  function setFilterById(id) {
+    const filterType = id === 1 ? Filter.NoFilter : (id === 2 ? Filter.Active : Filter.Completed);
+    setFilter(filterType);
+  }
+
+  function setSortById(id) {
+    const sortType = id === 1 ? SortType.NoSort : (id === 2 ? SortType.ByName : SortType.ByStatus);
+    setSortType(sortType);
+  }
 
   async function toggleItemCompleted(id) {
     const completed = !todoItems.find((item) => id === item.id).completed;
@@ -100,17 +122,25 @@ function App() {
         <div className="header">
           <h2 className="title">To Do List</h2>
           <Input ref={inputRef} addTodoItem={addTodoItem}/>
-          <Button text="All" action={() => setFilter(Filter.NoFilter)} />
-          <Button text="Active" action={() => setFilter(Filter.Active)} />
-          <Button text="Completed" action={() => setFilter(Filter.Completed)} />
+          <ButtonGroup
+            buttons={filterButtons}
+            defaultSelection={filterButtons[0].id}
+            clickHandle={(_, id) => setFilterById(id)}
+          />
           <br/>
-          <Button text="No Sort" action={() => setSortType(SortType.NoSort)} />
-          <Button text="Sort by description" action={() => setSortType(SortType.ByName)} />
-          <Button text="Sort by status" action={() => setSortType(SortType.ByStatus)} />
+          <ButtonGroup
+            buttons={sortTypeButtons}
+            defaultSelection={sortTypeButtons[0].id}
+            clickHandle={(_, id) => setSortById(id)}
+          />
         </div>
         { !isLoaded ?
             <Loader /> :
-            <TodoList itemsList={filteredAndSortedTodoItems} toggleCompleted={toggleItemCompleted} deleteItem={deleteTodoItem}/>
+            <TodoList
+              itemsList={filteredAndSortedTodoItems}
+              toggleCompleted={toggleItemCompleted}
+              deleteItem={deleteTodoItem}
+            />
         }
       </div>
     );

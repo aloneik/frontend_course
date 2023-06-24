@@ -2,7 +2,7 @@ import { useState } from "react";
 
 import styles from "./Button.module.css"
 
-function Button({ text, color, action = () => {} }) {
+function Button({ color, children, action = () => {} }) {
     const [selected, setSelected] = useState(false);
 
     function handleSelected() {
@@ -23,7 +23,7 @@ function Button({ text, color, action = () => {} }) {
                 backgroundColor: color
             }}
         >
-            {text}
+            {children}
         </button>
     );
 }

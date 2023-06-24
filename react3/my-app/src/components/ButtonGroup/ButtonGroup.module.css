@@ -1,0 +1,10 @@
+.customButton {
+    letter-spacing: 0.5px;
+    border: 1.5px solid rgb(25, 26, 24);
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.active {
+    border: 2px solid #E0314B;
+}
