@@ -1,0 +1,22 @@
+/* Include the padding and border in an element's total width and height */
+* {
+    box-sizing: border-box;
+}
+
+/* Style the header */
+.header {
+    padding: 30px 40px;
+    text-align: center;
+}
+
+/* Clear floats after the header */
+.header:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.dark {
+    color: white;
+    background-color: black;
+}
