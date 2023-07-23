@@ -1,0 +1,13 @@
+.selected {
+    border-radius: 5px;
+}
+
+.buttonDark {
+    color: white;
+    background-color: black;
+}
+
+.buttonLight {
+    color: black;
+    background-color: white;
+}
