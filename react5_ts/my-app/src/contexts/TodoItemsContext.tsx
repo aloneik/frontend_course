@@ -106,13 +106,11 @@ export function TodoItemsProvider<TProvider extends BaseTodosService>({ children
         match(changedItem)
             .with(undefined, _ => console.log(`Unable to find item with id: ${itemId}`))
             .otherwise(async item => {
+                item.completed = !item.completed;
                 try {
                     await providerService.updateTodoItem(itemId, { completed: item.completed });
 
-                    const updatedItem = tasks.find((item: ITodoItem) => itemId === item.id);
-                    match(updatedItem)
-                        .with(undefined, _ => console.log(`Unable to find item with id: ${itemId}`))
-                        .otherwise(item => dispatch(new TodosChangeAction(item)));
+                    dispatch(new TodosChangeAction(item));
                 }
                 catch (error) {
                     console.log(error);
