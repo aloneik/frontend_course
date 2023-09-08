@@ -1,0 +1,120 @@
+body {
+    margin: 0;
+    padding: 0;
+    display: block;
+    min-height: 93vh;
+    position: relative;
+    padding-bottom: 50px;
+}
+
+.fixed-header {
+    float: left;
+    width: 100%;
+    position: relative;
+    background: #66A182;
+    padding: 10px 0;
+    color: #b5b4b4; 
+    top: 0;
+    display: flex;
+}
+
+.container.nav {
+    padding-left: 90px;
+}
+
+.footer {
+    width: 100%;
+    background: #6d9f85;
+    padding: 10px 0;
+    color: #ffffff;
+    position: absolute;
+    bottom: 0px;
+}
+
+.fixed-footer {
+    bottom: 0;
+}
+
+.containerList {
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+}
+
+.container, .title {
+    margin: 0 auto;
+    display: block;
+    text-align: center;
+    height: 100%;
+    margin-bottom: 10px;
+}
+
+.nav-link {
+    border: 1px solid green;
+    padding: 7px 25px;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, 0);
+    outline: 1px solid;
+    outline-color: rgba(255, 255, 255, .5);
+    outline-offset: 0px;
+    text-shadow: none;
+    transition: all 1250ms cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.nav-link:hover {
+    border: 1px solid;
+    box-shadow: inset 0 0 20px rgba(255, 255, 255, .5), 0 0 20px rgba(255, 255, 255, .2);
+    outline-color: rgba(255, 255, 255, 0);
+    outline-offset: 15px;
+    text-shadow: 1px 1px 2px #427388;
+}
+
+.active-tab {
+    color: blue;
+}
+
+
+.signOut-link {
+    background: #51A3B8;
+    font-size: 20px;
+    color: white;
+    border-radius: 7px;
+    box-shadow: 0 7px 0px #387796;
+    display: inline-block;
+    transition: all .2s;
+    position: relative;
+    padding: 7px 25px;
+    position: relative;
+    top: 0;
+    cursor: pointer;
+    margin: 0 30px;
+}
+
+.signOut-link:active {
+    top: 3px;
+    box-shadow: 0 2px 0px #387796;
+    transition: all .2s;
+}
+
+.signIn-link {
+    background: #7986cb;
+    font-size: 20px;
+    color: white;
+    border-radius: 7px;
+    box-shadow: 0 7px 0px #3f51b5;
+    display: inline-block;
+    transition: all .2s;
+    position: relative;
+    padding: 7px 25px;
+    position: relative;
+    top: 0;
+    cursor: pointer;
+    margin: 0 30px;
+}
+
+.signIn-link:active {
+    top: 3px;
+    box-shadow: 0 2px 0px #3f51b5;
+    transition: all .2s;
+}
