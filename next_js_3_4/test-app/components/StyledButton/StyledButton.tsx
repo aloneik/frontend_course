@@ -4,53 +4,104 @@ type ButtonType = "text" | "contained" | "outlined";
 type ButtonColor = "success" | "error" | "secondary";
 
 const BASE_COLOR = "#1976D2";
-const GRAY_COLOR = "gray";
-const HOVER_COLOR = "#1565c0";
+const GRAY_COLOR = "#808080";
+
+const SECONDARY_COLOR = "#9C27B0";
+const ERROR_COLOR = "#D32F2F";
+const SUCCESS_COLOR = "#2E7D32";
+
+const HOVER_SECONDARY_COLOR = "#7B1FA2";
+const HOVER_ERROR_COLOR = "#C62828";
+const HOVER_SUCCESS_COLOR = "#1B5E20";
+const HOVER_BASE_COLOR = "#1565C0";
+
+function hexToRGB(hex: string, alpha: number) {
+    var r = parseInt(hex.slice(1, 3), 16),
+        g = parseInt(hex.slice(3, 5), 16),
+        b = parseInt(hex.slice(5, 7), 16);
+
+    if (alpha) {
+        return "rgba(" + r + ", " + g + ", " + b + ", " + alpha + ")";
+    } else {
+        return "rgb(" + r + ", " + g + ", " + b + ")";
+    }
+}
 
 function getBaseColor(props: any) {
-    return props.$disabled ? GRAY_COLOR : BASE_COLOR;
+    if (props.$color === "secondary") {
+        return SECONDARY_COLOR;
+    }
+    if (props.$color === "error") {
+        return ERROR_COLOR;
+    }
+    if (props.$color === "success") {
+        return SUCCESS_COLOR;
+    }
+
+    return BASE_COLOR;
+}
+
+function getHoverBaseColor(props: any) {
+    if (props.$color === "secondary") {
+        return HOVER_SECONDARY_COLOR;
+    }
+    if (props.$color === "error") {
+        return HOVER_ERROR_COLOR;
+    }
+    if (props.$color === "success") {
+        return HOVER_SUCCESS_COLOR;
+    }
+
+    return HOVER_BASE_COLOR;
 }
 
 function getColor(props: any) {
-    if (props.$color === "secondary") {
-        return "#9C27B0";
-    }
-    else if (props.$color === "error") {
-        return "#D32F2F";
+    if (props.$disabled){
+        return GRAY_COLOR;
     }
 
     return props.$variant === "contained" ? "white" : getBaseColor(props);
 }
 
 function getBackgroundColor(props: any) {
+    
     if (props.$variant === "contained") {
+        if (props.$disabled) {
+            return  hexToRGB(getColor(props), 0.5);;
+        }
         return getBaseColor(props);
-    }
-
-    if (props.$color === "success") {
-        return "#2E7D32";
     }
 
     return "white";
 }
 
 function getBorderColor(props: any) {
-    return props.$variant === "outlined" ? `1px solid ${getBaseColor(props)}` : 0;
+    const color = hexToRGB(getColor(props), 0.5);
+    return props.$variant === "outlined" ? `1px solid ${color}` : 0;
 }
 
-function getHoverColor(props: any) {
+function getHoverBorderColor(props: any) {
     if (props.$disabled) {
-        return (props.$variant === "text" || props.$variant === "outlined") ? "white" : GRAY_COLOR;
+        return  "";
+    }
+    return props.$variant === "outlined" ? `1px solid ${getColor(props)}` : 0;
+}
+function getHoverBackgroundColor(props: any) {
+    if (props.$disabled) {
+        return  "";
     }
 
     if (props.$variant !== "contained") {
-        return "rgba(25, 118, 210, 0.04)";
+        return hexToRGB(getBaseColor(props), 0.1); // "rgba(25, 118, 210, 0.04)";
     }
 
-    return HOVER_COLOR;
+    return getHoverBaseColor(props);
 }
 
 function getHoverBoxShadow(props: any) {
+    if (props.$disabled) {
+        return  "";
+    }
     if (props.$disabled || props.$variant !== "contained") {
         return "";
     }
@@ -81,7 +132,8 @@ export const StyledButton = styled.button<{ $variant: ButtonType; $color?: Butto
     border-radius: 4px;
 
     &&:hover {
-        background-color: ${getHoverColor};
+        background-color: ${getHoverBackgroundColor};
         box-shadow: ${getHoverBoxShadow};
+        border: ${getHoverBorderColor};
     }
 `;

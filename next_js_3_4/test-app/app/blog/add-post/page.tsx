@@ -49,14 +49,6 @@ export default function AddPost() {
                     <input type="submit" value="Create post" />
                 </form>
             </div>
-            <StyledButton $variant="text">Text</StyledButton>
-            <StyledButton $variant="text" $disabled={true}>Disabled text</StyledButton>
-            <br/>
-            <StyledButton $variant="contained">Contained</StyledButton>
-            <StyledButton $variant="contained" $disabled={true}>Disabled Contained</StyledButton>
-            <br/>
-            <StyledButton $variant="outlined">Outlined</StyledButton>
-            <StyledButton $variant="outlined" $disabled={true}>Disabled Outlined</StyledButton>
         </>
     )
 }

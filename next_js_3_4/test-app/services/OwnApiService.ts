@@ -98,13 +98,19 @@ export default class OwnApiPostService implements BasePostService {
             .then(items => items.map<IUser>(item => OwnApiPostService.ToIUser(item)));
     }
 
-    async getUser(userId: number): Promise<IUser | undefined> {
-        const response = await fetch(`${OwnApiPostService.usersUrl}/${userId}`, { next: { revalidate: 300 }});
-        if (!response.ok) {
-            console.log(`Unable to fetch user with id: ${userId}`);
-            // console.log(response);
-            return undefined;
+    async getUser(userId: number): Promise<IUser | null> {
+        let user = null;
+        try {
+            const response = await fetch(`${OwnApiPostService.usersUrl}/${userId}`, { next: { revalidate: 300 }});
+            if (!response.ok) {
+                console.log(`Unable to fetch user with id: ${userId}`);
+                return null;
+            }
+            user = await response.json().then(item => OwnApiPostService.ToIUser(item));
         }
-        return await response.json().then(item => OwnApiPostService.ToIUser(item));
+        catch {
+            console.log(`Unable to get user with id: ${userId}`);
+        }
+        return user;
     }
 }

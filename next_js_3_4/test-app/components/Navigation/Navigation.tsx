@@ -41,7 +41,7 @@ export function Navigation({ navLinks }: NavigationProps) {
                     })}>
                   Sign Out
                   </Link>
-                : <Link  className="signIn-link" href="/api/auth/signin">Sign In</Link>
+                : <Link  className="signIn-link" href="/signin">Sign In</Link>
             }
         </>
     )

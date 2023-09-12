@@ -26,13 +26,12 @@ export default function Post({ params: { id } }: PostProps) {
         providerService.getPost(id).then((newPost) => {
             setPost(newPost);
         });
-    }, []);
-    
+    }, [id]);
+
     const router = useRouter();
 
     async function handleDelete(id: string) {
         providerService.deletePost(id);
-        // redirect("/blog");
         router.push("/blog");
     }
     return (

@@ -9,5 +9,5 @@ export interface BasePostService {
     deletePost(id: string): Promise<Response>;
     searchPost(searchTerm: string): Promise<IPost[]>;
     getUsers(): Promise<IUser[]>;
-    getUser(userId: number): Promise<IUser | undefined>;
+    getUser(userId: number): Promise<IUser | null>;
 }
